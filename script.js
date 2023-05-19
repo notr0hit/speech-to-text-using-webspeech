@@ -8,19 +8,17 @@ recognition.continuous = true;
 let isRecording = false;
 
 recognition.addEventListener('result', (event) => {
-  let text = Array.from(event.results)
-    .map((result) => result[0].transcript)
-    .join('');
+  const detectedText= event.results[event.resultIndex][0].transcript;
+  const instruction = detectedText.toLowerCase().trim();
 
-  
-  outputDiv.innerHTML = ' ';
   if (event.results[0].isFinal) {
-    if (text.toLowerCase().includes('stop recording')) {
+    if (instruction == 'stop recording') {
+      outputDiv.innerHTML = '';
       toggleRecording();
-    } else if (text.toLowerCase().includes('reset input')) {
+    } else if (instruction == 'reset input') {
       outputDiv.innerHTML = '';
     } else {
-      outputDiv.innerHTML += text + ' ';
+      outputDiv.innerHTML += detectedText + ' ';
     }
   }
 });
