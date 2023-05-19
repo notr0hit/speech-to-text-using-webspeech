@@ -2,8 +2,7 @@ const micButton = document.getElementById('mic-button');
 const outputDiv = document.getElementById('output');
 
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-recognition.interimResults = true;
-// recognition.lang = 'en-US';
+
 recognition.continuous = true;
 let isRecording = false;
 
